@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mubs Amenities Suppliers</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="layout.css" />
+  <link rel="stylesheet" href="index-style.css" />
+  <link rel="stylesheet" href="libs/swiper/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="libs/aos/aos.css" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="images/Mubs Logo.png" type="image/png" />
+</head>
+
+<body>
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container">
+        <a href="#" class="logo">
+            <img src="images/Mubs.svg.svg" alt="Mubs Amenities Suppliers Logo" />
+        </a>
+        <nav class="main-nav">
+            <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+  </header>
+
+  <!-- HERO  -->
+ <section class="hero">
+  <div class="hero-left">
+    <div class="hero-content" data-aos="fade-up">
+      <h1>EVERY DETAIL MATTERS</h1>
+      <h2>EVERY GUEST REMEMBERS</h2>
+      <a href="#about" class="btn">EXPLORE NOW</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-slider">
+      <img src="trial images only/WhatsApp Image 2025-07-15 at 16.44.35.jpeg" class="active" />
+      <img src="trial images only/WhatsApp Image 2025-07-15 at 16.40.37.jpeg" />
+      <img src="assets/img/hero3.jpg" />
+    </div>
+  </div>
+  <script>
+        const heroImages = document.querySelectorAll('.hero-slider img');
+        let currentIndex = 0;
+
+        setInterval(() => {
+            heroImages[currentIndex].classList.remove('active');
+            currentIndex = (currentIndex + 1) % heroImages.length;
+            heroImages[currentIndex].classList.add('active');
+        }, 4000);
+   </script>
+
+</section>
+
+  <!-- ABOUT US -->
+<section id="about" class="about-section">
+  <div class="container about-container">
+    <div class="about-images">
+      <img src="trial images only/WhatsApp Image 2025-07-15 at 16.40.37.jpeg" class="about-large" />
+      <img src="trial images only/WhatsApp Image 2025-07-15 at 16.44.35.jpeg" class="about-small" />
+    </div>
+    <div class="about-text" data-aos="fade-left">
+      <h2>About Us</h2>
+      <p>
+        At Mubs Amenities Suppliers, we offer a wide range of high-quality welcome items and operational equipment, 
+        specially designed for the hospitality industry. From standard product lines to premium equipment, 
+        we cater to the needs of establishments of all sizes, from guesthouses to international hotel groups. 
+        Whether you are outfitting a boutique accommodation or managing multiple properties,
+        our products ensure your guests experience comfort and thoughtful care at every moment.
+      </p>
+      <a href="about.html" class="btn">More About Us</a>
+    </div>
+  </div>
+</section>
+
+
+
+  <!-- WHY US -->
+<section class="features-section">
+  <div class="container" data-aos="fade-up">
+    <h2>WHY CHOOSE MUBS?</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <img src="images/Mubs.svg.svg" alt="B-BBEE Certified" />
+        <h3>Proudly B-BBEE Level 1 Certified</h3>
+      </div>
+      <div class="feature-card">
+        <img src="images/Mubs.svg.svg" alt="30+ Years" />
+        <h3>Over 30 Years of Industry Experience</h3>
+      </div>
+      <div class="feature-card">
+        <img src="images/Mubs.svg.svg" alt="Locally Designed" />
+        <h3>Locally Designed and Manufactured Amenities</h3>
+      </div>
+      <div class="feature-card">
+        <img src="images/Mubs.svg.svg" alt="Preferred Supplier" />
+        <h3>Preferred Supplier to Leading International & Local Hotel Groups</h3>
+      </div>
+      <div class="feature-card">
+        <img src="images/Mubs.svg.svg" alt="Reliable Network" />
+        <h3>Extensive and Reliable Distribution Network</h3>
+      </div>
+    </div>
+  </div>
+</section>
+
+ <!-- PRODUCT OFFERINGS -->
+<section class="products-section">
+  <div class="container product-container">
+    <div class="product-text" data-aos="fade-right">
+      <h2>WHAT WE OFFER</h2>
+      <ul class="product-list">
+        <li>OFF-THE-SHELF AMENITIES RANGES</li>
+        <li>PERSONALISED HOTEL AMENITIES RANGES</li>
+        <li>OUR AMENITIES RANGE</li>
+        <li>IMPORTED HOTEL AMENITIES RANGES</li>
+        <li>HOTEL OPERATING PRODUCTS</li>
+        <li>PROMO SACHETS</li>
+      </ul>
+      <div class="product-buttons">
+        <a href="#" class="outline-btn">OFF-THE-SHELF RANGES</a>
+        <a href="#" class="outline-btn">OPERATING EQUIPMENT</a>
+      </div>
+    </div>
+    <div class="product-image">
+      <img src="trial images only/WhatsApp Image 2025-07-15 at 16.44.35.jpeg" class="prod-top" />
+      <img src="trial images only/WhatsApp Image 2025-07-15 at 16.40.37.jpeg" class="prod-bottom" />
+    </div>
+  </div>
+</section>
+
+ <!-- NEW ARRIVALS AND SPECIALS -->
+<section class="new-arrivals" data-aos="fade-up">
+  <div class="container">
+    <h2>NEW ARRIVALS AND SPECIALS</h2>
+    <div class="arrivals-grid">
+      <div class="arrival-item">
+        <img src="images/WhatsApp Image 2025-07-16 at 18.25.18.jpeg" alt="Product 1" />
+      </div>
+      <div class="arrival-item">
+        <img src="images/WhatsApp Image 2025-07-16 at 18.25.18.jpeg" alt="Product 2" />
+      </div>
+      <div class="arrival-item">
+        <img src="images/WhatsApp Image 2025-07-16 at 18.25.18.jpeg" alt="Product 3" />
+      </div>
+        <div class="arrival-item">
+            <img src="images/WhatsApp Image 2025-07-16 at 18.25.18.jpeg" alt="Product 4" />
+    </div>
+    <div class="offers-btn-wrapper">
+      <a href="#" class="offers-btn">SPECIAL OFFERS</a>
+    </div>
+  </div>
+</section>
+
+
+  <!-- QUOTE SECTION -->
+  <section class="quote-section" data-aos="fade-up">
+    <div class="container">
+      <blockquote>
+        “We believe hospitality is remembered through the smallest of details.”
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-columns">
+        <div>
+          <h4>Contact</h4>
+          <p>Email: info@mubs.co.za</p>
+          <p>Phone: +27 12 345 6789</p>
+        </div>
+        <div>
+          <h4>Follow Us</h4>
+          <p>Instagram | LinkedIn</p>
+        </div>
+      </div>
+      <p class="copyright">© 2025 Mubs Amenities Suppliers. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- JS Libraries -->
+  <script src="libs/swiper/swiper-bundle.min.js"></script>
+  <script src="libs/aos/aos.js"></script>
+  <script src="js/main.js"></script>
+
+  <!-- Init Scripts -->
+  <script>
+    AOS.init();
+    var swiper = new Swiper(".mySwiper", {
+      slidesPerView: 2,
+      spaceBetween: 30,
+      loop: true,
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      autoplay: {
+        delay: 3000,
+      },
+      breakpoints: {
+        768: { slidesPerView: 3 },
+        1024: { slidesPerView: 4 }
+      }
+    });
+  </script>
+</body>
+</html>

@@ -7,7 +7,7 @@ This is the official website for **Mubs Amenities Suppliers**, built with HTML, 
 - `index.html` – Homepage (English + French toggle coming soon)
 - `about.html`, `products.html`, `contact.html` , `special-offers.html`.
 - `css/`
-  - `index.css` – Styles specific to the homepage
+  - `index-style.css` – Styles specific to the homepage
   - `about.css`, `products.css`, etc. – Styles for individual pages
   - `layout.css` – Shared layout styles for header and footer
 - `js/`
