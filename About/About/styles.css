@@ -114,37 +114,22 @@ body {
     color: #666;
 }
 
-.image-parent {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    position: relative;
-    width: 40rem;
-}
-
 .image-content img {
     width: 100%;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    position: relative;
-}
-
-.image-content-two {
-    right: 12rem;
-    left: 16rem;
 }
 
 .overlay {
     position: absolute;
-    top: 74px;
-    left: 540px;
-    width: 229px;
-    height: 231px;
-    background: #A9C9A4;
-    border-radius: 11%;
-    padding: 0px;
+    top: -15px;
+    left: -15px;
+    width: 100px;
+    height: 100px;
+    background: #FFFFFF;
+    border-radius: 50%;
+    padding: 5px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
 }
 
 .overlay img {
@@ -156,7 +141,7 @@ body {
 
 .banner {
     background-color: #A9C9A4;
-    padding: 133px 0;
+    padding: 125px 0;
     text-align: center;
 }
 
@@ -181,7 +166,6 @@ body {
     margin-bottom: 40px;
 }
 
-/* Animation for Offerings Section */
 .offerings-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -190,14 +174,6 @@ body {
 
 .offering-item {
     text-align: center;
-    opacity: 0; /* Start hidden */
-    transform: scale(0.9); /* Start slightly smaller */
-    transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-.offering-item.animate {
-    opacity: 1;
-    transform: scale(1);
 }
 
 .offering-item img {
@@ -265,7 +241,6 @@ body {
     margin: 0 auto 40px;
 }
 
-/* Animation for Accreditations Section */
 .accreditations-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -274,14 +249,6 @@ body {
 
 .accreditation-item {
     text-align: center;
-    opacity: 0; /* Start hidden */
-    transform: translateX(-100%); /* Start off-screen to the left */
-    transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-.accreditation-item.animate {
-    opacity: 1;
-    transform: translateX(0); /* Slide to original position */
 }
 
 .accreditation-item img {
