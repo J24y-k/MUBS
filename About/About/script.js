@@ -31,44 +31,4 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         header.appendChild(toggleButton);
     }
-
-    // Overlay scroll effect
-    window.addEventListener('scroll', function() {
-        const overlay = document.querySelector('.overlay');
-        if (overlay) {
-            const scrollY = window.scrollY;
-            const offset = Math.min(scrollY / 10, 30); // max 30px
-            overlay.style.transform = `translateY(-${offset}px)`;
-        }
-    });
-
-    // Animation trigger on scroll for Offerings and Accreditations
-    function checkVisibility() {
-        const offeringsItems = document.querySelectorAll('.offering-item');
-        const accreditationsItems = document.querySelectorAll('.accreditation-item');
-
-        offeringsItems.forEach(item => {
-            if (isInViewport(item)) {
-                item.classList.add('animate');
-            }
-        });
-
-        accreditationsItems.forEach(item => {
-            if (isInViewport(item)) {
-                item.classList.add('animate');
-            }
-        });
-    }
-
-    function isInViewport(element) {
-        const rect = element.getBoundingClientRect();
-        return (
-            rect.top >= 0 &&
-            rect.top <= (window.innerHeight || document.documentElement.clientHeight)
-        );
-    }
-
-    // Run on scroll and initial load
-    window.addEventListener('scroll', checkVisibility);
-    checkVisibility(); // Check on page load
 });
