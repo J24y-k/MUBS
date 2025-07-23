@@ -11,7 +11,7 @@ body {
     background-color: #FFFFFF;
     color: #333;
     line-height: 1.6;
-    background-image: url('/About/photos/background.jpg');
+    background-image: url('/photos/background.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -28,12 +28,6 @@ body {
 }
 
 .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 15px;
-}
-
-.off-container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 15px;
@@ -129,19 +123,7 @@ body {
     transform: rotate(90deg);
 }
 
-/* Animations for Navbar */
-[data-animate="fade-in"] {
-    opacity: 0;
-    animation: fadeIn 1s ease-in-out forwards;
-}
-
-@keyframes fadeIn {
-    to {
-        opacity: 1;
-    }
-}
-
-.about-section {
+.hero-section {
     padding: 60px 0;
     background-color: #FFFFFF;
 }
@@ -152,22 +134,23 @@ body {
     gap: 30px;
 }
 
-.text-content, .image-content {
+.text-content, .hero-image {
     flex: 1;
-    min-width: 0;
+    min-width: 300px;
 }
 
 .text-content h2 {
     font-family: 'Poppins', Arial, sans-serif;
-    font-size: 5.5rem;
+    font-size: 4.5rem;
     font-weight: 700;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     letter-spacing: 4px;
 }
 
 .text-content p {
-    font-size: 1rem;
+    font-size: 1.2rem;
     color: #666;
+    margin-bottom: 30px;
 }
 
 .image-parent {
@@ -175,188 +158,87 @@ body {
     align-items: center;
     gap: 1rem;
     position: relative;
-    width: 40rem;
+    max-width: 40rem;
 }
 
-.image-content img {
+.hero-image img {
     width: 100%;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    position: relative;
-}
-
-.image-content-two {
-    right: 12rem;
-    left: 16rem;
-}
-
-.overlay {
-    position: absolute;
-    top: 74px;
-    left: 540px;
-    width: 229px;
-    height: 231px;
-    background: #A9C9A4;
-    border-radius: 11%;
-    padding: 0px;
+    border-radius: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
 }
 
-.overlay img {
+.hero-image img:hover {
+    transform: scale(1.02);
+}
+
+.hero-image .overlay {
+    position: absolute;
+    top: 74px;
+    right: 10px;
+    width: 229px;
+    height: 231px;
+    border-radius: 11%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+}
+
+.hero-image .overlay img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 50%;
+    border-radius: 11%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.banner {
+.hero-image .overlay:hover {
+    transform: translateY(-10px);
+}
+
+.special-offers-section {
+    padding: 60px 0;
     background-color: #A9C9A4;
-    padding: 133px 0;
-    text-align: center;
-}
-
-.banner-text {
-    font-size: 1.25rem;
-    font-style: italic;
     color: #FFFFFF;
-    font-weight: 600;
 }
 
-.offerings-section {
-    background-color: #1A3C34;
-    color: #FFFFFF;
-    padding: 60px 0;
-}
-
-.offerings-section h2 {
-    font-size: 1.875rem;
-    font-weight: bold;
-    text-transform: uppercase;
+.special-offers-section h3 {
+    font-family: 'Poppins', Arial, sans-serif;
+    font-size: 3.5rem;
+    font-weight: 700;
     letter-spacing: 2px;
-    margin-bottom: 40px;
-}
-
-/* Animation for Offerings Section */
-.offerings-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-}
-
-.offering-item {
+    margin-bottom: 20px;
     text-align: center;
-    opacity: 0; /* Start hidden */
-    transform: scale(0.9); /* Start slightly smaller */
-    transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-.offering-item.animate {
-    opacity: 1;
-    transform: scale(1);
-}
-
-.offering-item img {
-    width: 64px;
-    height: 64px;
-    margin-bottom: 10px;
-}
-
-.offering-item h3 {
-    font-size: 1.125rem;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.offering-item p {
-    color: #bbb;
-    font-size: 0.875rem;
-    max-width: 150px;
-    margin: 0 auto;
-}
-
-.transparent-section {
-    padding: 60px 0;
-    text-align: center;
-    background: transparent;
-}
-
-.transparent h2 {
-    font-size: 1.875rem;
-    font-weight: bold;
-    letter-spacing: 2px;
-    margin-bottom: 10px;
-    background: rgba(255,255,255,0.7); /* White with 70% opacity */
-    display: inline-block;
-    padding: 0.25em 1em;
-    border-radius: 8px;
-    color: #222;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.15);
-}
-
-.transparent p {
-    font-size: 1.567rem;
-    color: #666;
-    max-width: 600px;
-    margin: 0 auto 40px;
-}
-
-.accreditations-section {
-    padding: 60px 0;
-    text-align: center;
-    background-color: #FFFFFF;
-}
-
-.accreditations-section h2 {
-    font-size: 1.875rem;
-    font-weight: bold;
-    letter-spacing: 2px;
-    margin-bottom: 10px;
 }
 
 .subtitle {
-    font-size: 1rem;
-    color: #666;
+    font-size: 1.2rem;
+    color: #FFFFFF;
     max-width: 600px;
+    margin: 0 auto 40px;
+    text-align: center;
+}
+
+.offers-images {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
     margin: 0 auto 40px;
 }
 
-/* Animation for Accreditations Section */
-.accreditations-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
+.offers-images img {
+    width: 45%;
+    max-width: 400px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-.accreditation-item {
-    text-align: center;
-    opacity: 0; /* Start hidden */
-    transform: translateX(-100%); /* Start off-screen to the left */
-    transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-.accreditation-item.animate {
-    opacity: 1;
-    transform: translateX(0); /* Slide to original position */
-}
-
-.accreditation-item img {
-    width: 150px;
-    height: 150px;
-    margin-bottom: 10px;
-}
-
-.accreditation-item h3 {
-    font-size: 1.125rem;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.accreditation-item p {
-    color: #666;
-    font-size: 0.875rem;
-    max-width: 200px;
-    margin: 0 auto;
+.offers-images img:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
 }
 
 .footer {
@@ -423,11 +305,12 @@ body {
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    transition: transform 0.2s;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .action-button:hover {
     transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .action-button svg {
@@ -435,6 +318,57 @@ body {
     stroke: #FFFFFF;
     width: 24px;
     height: 24px;
+}
+
+/* Animations */
+[data-animate="fade-in"] {
+    opacity: 0;
+    animation: fadeIn 1s ease-in-out forwards;
+}
+
+[data-animate="slide-left"] {
+    opacity: 0;
+    transform: translateX(-50px);
+    animation: slideLeft 1s ease-in-out forwards;
+}
+
+[data-animate="slide-right"] {
+    opacity: 0;
+    transform: translateX(50px);
+    animation: slideRight 1s ease-in-out forwards;
+}
+
+[data-animate="slide-up"] {
+    opacity: 0;
+    transform: translateY(50px);
+    animation: slideUp 1s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideLeft {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideRight {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Responsive Design */
@@ -464,27 +398,14 @@ body {
         padding: 10px 0;
     }
 
-    .content-wrapper {
+    .offers-images {
         flex-direction: column;
+        align-items: center;
     }
 
-    .image-content {
-        position: relative;
-    }
-
-    .overlay {
-        top: -10px;
-        left: -10px;
-        width: 80px;
-        height: 80px;
-    }
-
-    .offerings-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .accreditations-grid {
-        grid-template-columns: 1fr;
+    .offers-images img {
+        width: 100%;
+        max-width: 100%;
     }
 
     .footer-content {
@@ -494,6 +415,21 @@ body {
 
     .action-buttons {
         bottom: 10px;
+        right: 10px;
+    }
+
+    .text-content h2 {
+        font-size: 2.5rem;
+    }
+
+    .special-offers-section h3 {
+        font-size: 2rem;
+    }
+
+    .hero-image .overlay {
+        width: 150px;
+        height: 150px;
+        top: 50px;
         right: 10px;
     }
 }
