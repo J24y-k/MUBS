@@ -1,0 +1,167 @@
+/* ========== CONTACT US PAGE STYLES ========== */
+
+/* About Section */
+.about-section {
+  background: #fff;
+  padding: 6rem 0;
+}
+
+.content-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.text-content {
+  flex: 1;
+  max-width: 500px;
+}
+
+.text-content h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #004c3f;
+}
+
+.text-content p {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.image-parent {
+  flex: 1;
+  position: relative;
+}
+
+.image-content {
+  position: relative;
+  width: 100%;
+}
+
+.image-content img {
+  width: 100%;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.overlay {
+  position: absolute;
+  top: 15%;
+  left: 85%;
+  width: 30%;
+  height: 30%;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.overlay img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+/* Contact Form Section */
+.contact-form-section {
+  background-color: #e9e9e7;
+  padding: 4rem 0;
+}
+
+.contact-form-section h2 {
+  font-size: 2.5rem;
+  color: #1a1a1a;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+#contact-form {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  color: #1a1a1a;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+.btn {
+  background-color: #1A3C34;
+  color: #fff;
+  padding: 0.9rem 1.8rem;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  transition: background 0.3s;
+  cursor: pointer;
+  width: fit-content;
+  align-self: flex-end;
+}
+
+.btn:hover {
+  background-color: #145249;
+}
+
+/* Map Section */
+.map-section {
+  padding: 2rem 0;
+}
+
+.map-container {
+  width: 100%;
+  overflow: hidden;
+}
+
+.map-container img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  display: block; /* Prevents inline spacing issues */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .content-wrapper {
+    flex-direction: column;
+  }
+
+  .image-parent {
+    order: -1;
+  }
+
+  .contact-form-section h2 {
+    font-size: 2rem;
+  }
+
+  #contact-form {
+    max-width: 100%;
+    padding: 0 1rem;
+  }
+
+  .map-container img {
+    height: 300px; /* Reduce height on mobile for better fit */
+  }
+}
