@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Animation on scroll for navbar
+    // Animation on scroll
     const animateElements = document.querySelectorAll('[data-animate]');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -36,33 +36,17 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(element);
     });
 
-    // Animation trigger on scroll for Offerings and Accreditations
-    function checkVisibility() {
-        const offeringsItems = document.querySelectorAll('.offering-item');
-        const accreditationsItems = document.querySelectorAll('.accreditation-item');
-
-        offeringsItems.forEach(item => {
-            if (isInViewport(item)) {
-                item.classList.add('animate');
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
             }
         });
-
-        accreditationsItems.forEach(item => {
-            if (isInViewport(item)) {
-                item.classList.add('animate');
-            }
-        });
-    }
-
-    function isInViewport(element) {
-        const rect = element.getBoundingClientRect();
-        return (
-            rect.top >= 0 &&
-            rect.top <= (window.innerHeight || document.documentElement.clientHeight)
-        );
-    }
-
-    // Run on scroll and initial load
-    window.addEventListener('scroll', checkVisibility);
-    checkVisibility(); // Check on page load
+    });
 });
