@@ -1,4 +1,4 @@
-/* ========== we're using this here so we do not have to keep modifying the header and footer ========== */
+/* Reset and Base Styles */
 * {
   margin: 0;
   padding: 0;
@@ -6,43 +6,34 @@
 }
 
 body {
-  font-family: "Segoe UI", sans-serif;
-  background-color: #fff;
-  color: #222;
+  font-family: Arial, sans-serif;
   line-height: 1.6;
 }
 
 .container {
   width: 90%;
   max-width: 1200px;
-  margin: auto;
+  margin: 0 auto;
 }
 
-/* ========== HEADER AND FOOTER STYLES ========== */
+/* Header Styles */
 .header {
-  background-color: #FFFFFF;
+  background-color: #004c3f;
+  padding: 1rem 0;
   position: sticky;
   top: 0;
-  z-index: 50;
+  z-index: 1000;
   padding: 15px 0;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s ease;
 }
 
 .top-container {
   display: flex;
-  justify-content: space-between; /* Distributes space between logo and nav */
   align-items: center;
-  width: 100%;
+  justify-content: space-between;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px; /* Add padding to prevent content from touching edges */
-}
-
-.logo-wrapper {
-  flex: 1; /* Allows the wrapper to take up space */
-  display: flex;
-  justify-content: center; /* Centers the logo horizontally */
+  padding: 0 1rem;
 }
 
 .logo {
@@ -50,119 +41,106 @@ body {
   align-items: center;
 }
 
-.logo img {
-  height: 50px;
-  margin-right: 10px;
-  transition: transform 0.3s ease;
+.logo-wrapper {
+  display: flex;
+  align-items: center;
 }
 
-.logo img:hover {
-  transform: scale(1.05);
+.logo img {
+  height: 50px;
+  margin-right: 1rem;
 }
 
 .logo-text h1 {
-  font-size: 1.2rem;
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  font-size: 1.5rem;
+  color: #fff;
 }
 
 .logo-text p {
-  font-size: 0.75rem;
-  color: #666;
-}
-
-.nav {
-  display: flex;
-  gap: 20px;
-  transition: all 0.3s ease;
-}
-
-.nav-link {
-  text-decoration: none;
-  color: #666;
-  font-weight: 500;
-  position: relative;
-  transition: color 0.3s ease;
-}
-
-.nav-link::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: -5px;
-  left: 0;
-  background-color: #1A3C34;
-  transition: width 0.3s ease;
-}
-
-.nav-link:hover::after,
-.nav-link.active::after {
-  width: 100%;
-}
-
-.nav-link.active {
-  color: #1A3C34;
-  font-weight: bold;
-}
-
-.nav-link:hover {
-  color: #1A3C34;
+  font-size: 0.9rem;
+  color: #ccc;
 }
 
 .menu-toggle {
   display: none;
-  font-size: 24px;
-  border: none;
   background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #fff;
   cursor: pointer;
-  color: #1A3C34;
-  transition: transform 0.3s ease;
 }
 
-.menu-toggle:hover {
-  transform: rotate(90deg);
+.nav {
+  display: flex;
+  align-items: center;
 }
 
-/* Animations for Navbar */
-[data-animate="fade-in"] {
-  opacity: 0;
-  animation: fadeIn 1s ease-in-out forwards;
+.nav-link {
+  color: #fff;
+  text-decoration: none;
+  margin-left: 2rem;
+  font-weight: 600;
+  position: relative;
+  transition: color 0.3s ease;
 }
 
-@keyframes fadeIn {
-  to {
-    opacity: 1;
-  }
+.nav-link:hover {
+  color: #219b8e; /* Green hover color matching btn hover */
 }
 
-/* Responsive Design for Navbar */
+.nav-link.active {
+  color: #219b8e; /* Active state color */
+}
+
+/* Products Dropdown */
+.nav .nav-link.products-link {
+  position: relative;
+}
+
+.nav .nav-link.products-link:hover .dropdown {
+  display: block;
+}
+
+.dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #004c3f;
+  min-width: 200px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  padding: 0.5rem 0;
+}
+
+.dropdown a {
+  color: #fff;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  display: block;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.dropdown a:hover {
+  background-color: #219b8e; /* Green hover color for dropdown items */
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
   .menu-toggle {
     display: block;
   }
 
-  .top-container {
-    flex-direction: column;
-    position: relative;
-  }
-
-  .logo-wrapper {
-    margin-bottom: 10px; /* Space between logo and toggle/nav */
-  }
-
   .nav {
     display: none;
     flex-direction: column;
+    width: 100%;
     position: absolute;
-    top: 60px;
-    right: 15px;
-    background: #FFFFFF;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 15px;
-    border-radius: 8px;
-    width: 200px;
+    top: 100%;
+    left: 0;
+    background-color: #004c3f;
+    padding: 1rem 0;
   }
 
   .nav.active {
@@ -170,11 +148,23 @@ body {
   }
 
   .nav-link {
-    padding: 10px 0;
+    margin: 0.5rem 0;
+    padding: 0.5rem 1rem;
+  }
+
+  .nav .nav-link.products-link .dropdown {
+    display: none; /* Disable dropdown on mobile */
+    position: static;
+    background-color: transparent;
+    box-shadow: none;
+    padding: 0;
+  }
+
+  .nav .nav-link.products-link:hover .dropdown {
+    display: none; /* Ensure no hover on mobile */
   }
 }
 
-/* FOOTER */
 .footer {
   background-color: #004c3f;
   color: #bbb;
@@ -218,4 +208,98 @@ body {
   width: 80px;
   height: 84px;
   margin-right: 10px;
+}
+
+.action-buttons {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 50;
+}
+
+.action-button {
+    background-color: #A9C9A4;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: transform 0.2s;
+}
+
+.action-button:hover {
+    transform: scale(1.1);
+}
+
+.action-button svg {
+    fill: none;
+    stroke: #FFFFFF;
+    width: 24px;
+    height: 24px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        right: 15px;
+        background: #FFFFFF;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        padding: 15px;
+        border-radius: 8px;
+        width: 200px;
+    }
+
+    .nav.active {
+        display: flex;
+    }
+
+    .nav-link {
+        padding: 10px 0;
+    }
+
+    .content-wrapper {
+        flex-direction: column;
+    }
+
+    .image-content {
+        position: relative;
+    }
+
+    .overlay {
+        top: -10px;
+        left: -10px;
+        width: 80px;
+        height: 80px;
+    }
+
+    .offerings-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .accreditations-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .action-buttons {
+        bottom: 10px;
+        right: 10px;
+    }
 }
