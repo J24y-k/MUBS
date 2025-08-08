@@ -215,7 +215,7 @@ body {
     padding: 0.5rem 1rem;
     border-radius: 9999px;
     background-color: #eff6ff;
-    color: #2563eb;
+    color: #004c3f;
     text-decoration: none;
     transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
 }
@@ -227,7 +227,7 @@ body {
 
 .category-link.active-category {
     background-color: #dbeafe;
-    color: #1d4ed8;
+    color: #004c3f;
 }
 
 .product-grid {
