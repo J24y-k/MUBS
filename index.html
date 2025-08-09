@@ -25,10 +25,11 @@
                     <p>A division of Bidvest Services (Pty) Ltd</p>
                 </div>
             </div>
-            <button class="menu-toggle" aria-label="Toggle Menu">☰</button>
+            <input type="checkbox" id="menu-toggle-checkbox" class="menu-toggle-checkbox">
+            <label for="menu-toggle-checkbox" class="menu-toggle">☰</label>
             <nav class="nav" data-animate="fade-in">
-                <a href="/index.html" class="nav-link">HOME</a>
-                <a href="/About/about.html" class="nav-link active">ABOUT US</a>
+                <a href="/index.html" class="nav-link active">HOME</a>
+                <a href="/About/about.html" class="nav-link">ABOUT US</a>
                 <a href="/Products/products.html" class="nav-link products-link">PRODUCTS</a>
                 <a href="/Special offers/offers.html" class="nav-link">SPECIAL OFFERS</a>
                 <a href="/Contact/contact.html" class="nav-link">CONTACT US</a>
@@ -238,76 +239,56 @@
     let currentIndex = 0;
 
     setInterval(() => {
-      heroImages[currentIndex].classList.remove('active');
-      currentIndex = (currentIndex + 1) % heroImages.length;
-      heroImages[currentIndex].classList.add('active');
+        heroImages[currentIndex].classList.remove('active');
+        currentIndex = (currentIndex + 1) % heroImages.length;
+        heroImages[currentIndex].classList.add('active');
     }, 4000);
 
     // Consolidated Script
     document.addEventListener('DOMContentLoaded', () => {
-      // AOS Initialization
-      AOS.init();
+        // AOS Initialization
+        AOS.init();
 
-      // Swiper Initialization
-      const swiperContainer = document.querySelector('.mySwiper');
-      if (swiperContainer) {
-        var swiper = new Swiper('.mySwiper', {
-          slidesPerView: 2,
-          spaceBetween: 30,
-          loop: true,
-          pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
-          },
-          autoplay: {
-            delay: 3000,
-          },
-          breakpoints: {
-            768: { slidesPerView: 3 },
-            1024: { slidesPerView: 4 }
-          }
+        // Swiper Initialization
+        const swiperContainer = document.querySelector('.mySwiper');
+        if (swiperContainer) {
+            var swiper = new Swiper('.mySwiper', {
+                slidesPerView: 2,
+                spaceBetween: 30,
+                loop: true,
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                autoplay: {
+                    delay: 3000,
+                },
+                breakpoints: {
+                    768: { slidesPerView: 3 },
+                    1024: { slidesPerView: 4 }
+                }
+            });
+        }
+
+        // Animation on scroll for navbar
+        const animateElements = document.querySelectorAll('[data-animate]');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationDelay = `${entry.target.dataset.animateDelay || 0}s`;
+                    entry.target.classList.add('animate');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.2,
+            rootMargin: '0px 0px -50px 0px'
         });
-      }
 
-      // Navigation Menu and Animations
-      const menuToggle = document.querySelector('.menu-toggle');
-      const nav = document.querySelector('.nav');
-
-      if (menuToggle && nav) {
-        menuToggle.addEventListener('click', () => {
-          nav.classList.toggle('active');
+        animateElements.forEach(element => {
+            observer.observe(element);
         });
-
-        // Close mobile menu when clicking a nav link
-        const navLinks = document.querySelectorAll('.nav-link');
-        navLinks.forEach(link => {
-          link.addEventListener('click', () => {
-            if (window.innerWidth <= 768) {
-              nav.classList.remove('active');
-            }
-          });
-        });
-      }
-
-      // Animation on scroll for navbar
-      const animateElements = document.querySelectorAll('[data-animate]');
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.style.animationDelay = `${entry.target.dataset.animateDelay || 0}s`;
-            entry.target.classList.add('animate');
-            observer.unobserve(entry.target);
-          }
-        });
-      }, {
-        threshold: 0.2,
-        rootMargin: '0px 0px -50px 0px'
-      });
-
-      animateElements.forEach(element => {
-        observer.observe(element);
-      });
     });
-  </script>
+</script>
 </body>
 </html>
