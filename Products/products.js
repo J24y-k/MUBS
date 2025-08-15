@@ -12,7 +12,82 @@ function initCustomCursor() {
       duration: 0.1,
       ease: "power2.out"
     });
+  });function renderProducts(category) {
+  const grid = document.getElementById('product-grid');
+  grid.innerHTML = '';
+  let prods = [];
+
+  if (category === 'all') {
+    Object.entries(products).forEach(([catName, catItems]) => {
+      prods = prods.concat(catItems.map(p => ({ ...p, category: catName })));
+    });
+  } else {
+    prods = (products[category] || []).map(p => ({ ...p, category }));
+  }
+
+  prods.forEach(product => {
+    const card = document.createElement('div');
+    card.className = 'product-item';
+    card.dataset.category = product.category;
+    card.dataset.id = product.id;
+    card.innerHTML = `
+      <img src="${product.image}" alt="${product.name}" class="product-image" 
+        onerror="this.src='https://via.placeholder.com/150x150?text=No+Image'">
+      <div class="product-description">${product.description}</div>
+      <div class="product-price">R${product.price}</div>
+      <button class="add-to-cart">Add to Cart</button>
+    `;
+    grid.appendChild(card);
   });
+}
+
+renderProducts('all');
+
+// Category tab switching
+document.querySelectorAll('.tab-button').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+    renderProducts(this.getAttribute('data-category'));
+  });
+});
+
+// Cart
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+function updateCartCount() {
+  document.getElementById('cart-count').textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+}
+updateCartCount();
+
+// Add to cart
+document.getElementById('product-grid').addEventListener('click', (e) => {
+  if (e.target.classList.contains('add-to-cart')) {
+    e.stopPropagation();
+    const card = e.target.closest('.product-item');
+    const category = card.dataset.category;
+    const id = parseInt(card.dataset.id);
+    const product = products[category].find(p => p.id === id);
+
+    const existing = cart.find(item => item.id === id && item.category === category);
+    if (existing) {
+      existing.quantity += 1;
+    } else {
+      cart.push({ ...product, quantity: 1, category });
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartCount();
+    alert(`${product.name} added to cart!`);
+  }
+});
+
+// Navigate to details
+document.getElementById('product-grid').addEventListener('click', (e) => {
+  const card = e.target.closest('.product-item');
+  if (card && !e.target.classList.contains('add-to-cart')) {
+    window.location.href = `product-details.html?category=${card.dataset.category}&id=${card.dataset.id}`;
+  }
+});
+
 }
 
 function renderProducts(category) {
