@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Products - Mubs</title>
+    <title>Product Details - Mubs</title>
     <link rel="stylesheet" href="styles.css">
     <!-- Favicon -->
     <link rel="icon" href="/images/Mubs Logo.png" type="image/png" />
@@ -33,54 +33,22 @@
                 <a href="/Contact/contact.html" class="nav-link">CONTACT US</a>
             </nav>
             <div class="search">🔍</div>
-            <a href="cart.html" class="cart-icon" id="cart-icon">🛒 <span id="cart-count">0</span></a>
+            <div class="cart-icon" id="cart-icon">🛒 <span id="cart-count">0</span></div>
         </div>
     </header>
 
-    <!-- Main Content -->
-  <main class="main-content-container">
-    <!-- About Section -->
-    <section class="about-section">
-      <div class="container">
-        <div class="content-wrapper">
-          <div class="text-content">
-            <h2>PRODUCTS</h2>
-           <p>
-            At Mubs, we offer a carefully curated selection of premium hotel essentials designed
-             to elevate the guest experience. Our wide range includes personal care items, grooming kits, 
-             in-room accessories, and custom-branded packaging, all crafted with quality and comfort in mind for 
-             establishments of every scale.
-          </p>
-
-          </div>
-          <div class="image-content">
-            <img src="/images/clients-products.jpg" alt="Happy guests enjoying hotel amenities">
-            <div class="overlay">
-              <img src="https://placehold.co/128x128/ffffff/cccccc?text=Lotion" alt="Lotion swirl">
+    <main>
+        <section class="product-details section">
+            <div class="container">
+                <button id="back-button" class="back-button">← Back</button>
+                <div id="product-info">
+                    <!-- Loaded via JS -->
+                </div>
+                <button id="add-to-cart" class="add-to-cart">Add to Cart</button>
+                <p id="status-message"></p>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- Product Categories -->
-    <section>
-      <nav class="category-nav">
-        <div class="category-tabs">
-          <button class="tab-button active" data-category="all">ALL</button>
-          <button class="tab-button" data-category="personal-care">PERSONAL CARE</button>
-          <button class="tab-button" data-category="grooming-essentials">GROOMING ESSENTIALS</button>
-          <button class="tab-button" data-category="in-room-extras">IN-ROOM EXTRAS</button>
-          <button class="tab-button" data-category="branded-packaging">BRANDED PACKAGING</button>
-          <button class="tab-button" data-category="eco-conscious">ECO-CONSCIOUS PRODUCTS</button>
-        </div>
-      </nav>
-    </section>
-
-    <!-- Product Grid -->
-    <section class="product-grid" id="product-grid">
-      <!-- Products will be dynamically loaded here via JS -->
-    </section>
-  </main>
+        </section>
+    </main>
 
     <!-- Footer -->
     <footer class="footer">
@@ -122,6 +90,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="data.js"></script>
-    <script src="products.js"></script>
+    <script src="product-details.js"></script>
 </body>
 </html>
