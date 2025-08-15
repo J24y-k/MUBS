@@ -1,5 +1,4 @@
 /* ========== HERO ========== */
-/* Reset and Base Styles */
 * {
   margin: 0;
   padding: 0;
@@ -402,6 +401,9 @@ body {
 .hero-content h1 {
   font-size: 3.5rem;
   margin-bottom: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: black;
 }
 
 .hero-content h2 {
