@@ -1,4 +1,3 @@
-// products.js
 function initCustomCursor() {
   const cursor = document.getElementById('custom-cursor');
   if (!cursor) {
@@ -12,7 +11,10 @@ function initCustomCursor() {
       duration: 0.1,
       ease: "power2.out"
     });
-  });function renderProducts(category) {
+  });
+}
+
+function renderProducts(category) {
   const grid = document.getElementById('product-grid');
   grid.innerHTML = '';
   let prods = [];
@@ -33,82 +35,8 @@ function initCustomCursor() {
     card.innerHTML = `
       <img src="${product.image}" alt="${product.name}" class="product-image" 
         onerror="this.src='https://via.placeholder.com/150x150?text=No+Image'">
-      <div class="product-description">${product.description}</div>
-      <div class="product-price">R${product.price}</div>
-      <button class="add-to-cart">Add to Cart</button>
-    `;
-    grid.appendChild(card);
-  });
-}
-
-renderProducts('all');
-
-// Category tab switching
-document.querySelectorAll('.tab-button').forEach(btn => {
-  btn.addEventListener('click', function() {
-    document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
-    this.classList.add('active');
-    renderProducts(this.getAttribute('data-category'));
-  });
-});
-
-// Cart
-let cart = JSON.parse(localStorage.getItem('cart')) || [];
-function updateCartCount() {
-  document.getElementById('cart-count').textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
-}
-updateCartCount();
-
-// Add to cart
-document.getElementById('product-grid').addEventListener('click', (e) => {
-  if (e.target.classList.contains('add-to-cart')) {
-    e.stopPropagation();
-    const card = e.target.closest('.product-item');
-    const category = card.dataset.category;
-    const id = parseInt(card.dataset.id);
-    const product = products[category].find(p => p.id === id);
-
-    const existing = cart.find(item => item.id === id && item.category === category);
-    if (existing) {
-      existing.quantity += 1;
-    } else {
-      cart.push({ ...product, quantity: 1, category });
-    }
-    localStorage.setItem('cart', JSON.stringify(cart));
-    updateCartCount();
-    alert(`${product.name} added to cart!`);
-  }
-});
-
-// Navigate to details
-document.getElementById('product-grid').addEventListener('click', (e) => {
-  const card = e.target.closest('.product-item');
-  if (card && !e.target.classList.contains('add-to-cart')) {
-    window.location.href = `product-details.html?category=${card.dataset.category}&id=${card.dataset.id}`;
-  }
-});
-
-}
-
-function renderProducts(category) {
-  const grid = document.getElementById('product-grid');
-  grid.innerHTML = '';
-  let prods = [];
-  if (category === 'all') {
-    Object.values(products).forEach(cat => prods = prods.concat(cat));
-  } else {
-    prods = products[category] || [];
-  }
-  prods.forEach((product, index) => {
-    const card = document.createElement('div');
-    card.className = 'product-item';
-    card.dataset.category = category;
-    card.dataset.id = product.id;
-    card.innerHTML = `
-      <img src="${product.image}" alt="${product.name}" class="product-image" onerror="this.src='https://via.placeholder.com/150x150?text=No+Image'">
       <div class="overlay"><p>${product.name}</p></div>
       <div class="product-description">${product.description}</div>
-      <div class="product-price">R${product.price}</div>
       <button class="add-to-cart">Add to Cart</button>
     `;
     grid.appendChild(card);
@@ -139,36 +67,34 @@ updateCartCount();
 // Add to cart from product grid
 document.getElementById('product-grid').addEventListener('click', (e) => {
   if (e.target.classList.contains('add-to-cart')) {
-    e.stopPropagation(); // Prevent triggering card navigation
+    e.stopPropagation();
     const card = e.target.closest('.product-item');
     const category = card.dataset.category;
     const id = parseInt(card.dataset.id);
-    const product = Object.values(products).flat().find(p => p.id === id && products[category].includes(p));
+    const product = products[category].find(p => p.id === id);
+
     const existing = cart.find(item => item.id === id && item.category === category);
     if (existing) {
       existing.quantity += 1;
     } else {
-      cart.push({ ...product, quantity: 1, category });
+      cart.push({ ...product, quantity: 50, category });
     }
     localStorage.setItem('cart', JSON.stringify(cart));
     updateCartCount();
-    alert(`${product.name} added to cart!`);
+    alert(`${product.name} added to cart (minimum 10 units)!`);
   }
 });
 
 // Make cards clickable to details
-document.addEventListener('click', (e) => {
+document.getElementById('product-grid').addEventListener('click', (e) => {
   const card = e.target.closest('.product-item');
-  if (card) {
-    const category = card.dataset.category;
-    const id = card.dataset.id;
-    window.location.href = `product-details.html?category=${category}&id=${id}`;
+  if (card && !e.target.classList.contains('add-to-cart')) {
+    window.location.href = `product-details.html?category=${card.dataset.category}&id=${card.dataset.id}`;
   }
 });
 
 // Cart icon to cart page
-document.getElementById('cart-icon').addEventListener('click', (e) => {
-  e.preventDefault();
+document.getElementById('cart-icon').addEventListener('click', () => {
   window.location.href = 'cart.html';
 });
 

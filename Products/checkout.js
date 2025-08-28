@@ -15,21 +15,22 @@ function initCustomCursor() {
   });
 }
 
-function handleEFTFormSubmission() {
+function handleQuoteFormSubmission() {
   const form = document.getElementById('eft-form');
   const statusMessage = document.getElementById('status-message');
   if (!form || !statusMessage) {
-    console.error('EFT form or status message element not found.');
+    console.error('Form or status message element not found.');
     return;
   }
   form.addEventListener('submit', function(event) {
     event.preventDefault();
     const name = document.getElementById('name').value;
     const email = document.getElementById('email').value;
-    const account = document.getElementById('account').value;
-    const branch = document.getElementById('branch').value;
-    if (name && email && account && branch) {
-      statusMessage.textContent = 'Thank you for your payment details! We will process your order soon.';
+    const phone = document.getElementById('phone').value;
+    if (name && email && phone) {
+      // Simulate sending quote with cart details (in real app, send to backend)
+      console.log('Quote request:', { name, email, phone, cart });
+      statusMessage.textContent = 'Thank you! We will send your quote soon.';
       statusMessage.classList.add('success');
       setTimeout(() => {
         form.reset();
@@ -47,16 +48,14 @@ function handleEFTFormSubmission() {
 
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 const cartItems = document.getElementById('cart-items');
-const totalPrice = document.getElementById('total-price');
 
 function renderCart() {
   cartItems.innerHTML = '';
-  let total = 0;
   cart.forEach((item, index) => {
     const div = document.createElement('div');
     div.classList.add('cart-item');
     div.innerHTML = `
-      <span>${item.name} - R${item.price} x ${item.quantity}</span>
+      <span>${item.name} x ${item.quantity}</span>
       <div class="quantity-controls">
         <button class="qty-btn" data-index="${index}" data-action="decrease">-</button>
         <span>${item.quantity}</span>
@@ -65,9 +64,7 @@ function renderCart() {
       <button class="remove-item" data-index="${index}">Remove</button>
     `;
     cartItems.appendChild(div);
-    total += item.price * item.quantity;
   });
-  totalPrice.textContent = total;
 }
 
 document.addEventListener('click', (e) => {
@@ -75,7 +72,7 @@ document.addEventListener('click', (e) => {
     const index = parseInt(e.target.dataset.index);
     const action = e.target.dataset.action;
     if (action === 'increase') cart[index].quantity += 1;
-    else if (action === 'decrease' && cart[index].quantity > 1) cart[index].quantity -= 1;
+    else if (action === 'decrease' && cart[index].quantity > 50) cart[index].quantity -= 1;
     localStorage.setItem('cart', JSON.stringify(cart));
     renderCart();
   } else if (e.target.classList.contains('remove-item')) {
@@ -88,7 +85,7 @@ document.addEventListener('click', (e) => {
 
 // Initialize on DOM ready
 document.addEventListener('DOMContentLoaded', () => {
-  handleEFTFormSubmission();
+  handleQuoteFormSubmission();
   if (typeof gsap !== 'undefined') {
     initCustomCursor();
   } else {

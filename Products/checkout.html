@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout - Mubs</title>
+    <title>Request Quote - Mubs</title>
     <link rel="stylesheet" href="checkout.css">
     <!-- Favicon -->
     <link rel="icon" href="/images/Mubs Logo.png" type="image/png" />
@@ -42,20 +42,16 @@
             <div class="container">
                 <h2 class="section-title">Your Cart</h2>
                 <div id="cart-items"></div>
-                <div class="cart-total">
-                    <h3>Total: R<span id="total-price">0</span></h3>
-                </div>
-                <h3>EFT Payment Details</h3>
+                <h3>Request Quote Details</h3>
                 <form id="eft-form">
                     <input id="name" type="text" placeholder="Full Name" required>
                     <input id="email" type="email" placeholder="Email" required>
-                    <input id="account" type="text" placeholder="Bank Account Number" required>
-                    <input id="branch" type="text" placeholder="Branch Code" required>
+                    <input id="phone" type="tel" placeholder="Phone Number" required>
                     <textarea placeholder="Additional Notes" rows="3"></textarea>
-                    <button type="submit" class="submit-button">Complete EFT Payment</button>
+                    <button type="submit" class="submit-button">Submit Quote Request</button>
                 </form>
                 <p id="status-message"></p>
-                <p class="eft-note">After submission, you'll receive EFT instructions via email. For real integration, use a payment gateway like PayFast.</p>
+                <p class="eft-note">After submission, you'll receive quote instructions via email. For real integration, use a service like email API or CRM.</p>
             </div>
         </section>
     </main>

@@ -9,7 +9,6 @@ if (product) {
     <img src="${product.image}" alt="${product.name}" class="product-image" style="max-width: 400px;">
     <h2 class="product-name">${product.name}</h2>
     <p class="product-description">${product.description}</p>
-    <p class="product-price">R${product.price}</p>
   `;
 }
 
@@ -24,11 +23,19 @@ document.getElementById('add-to-cart').addEventListener('click', () => {
   if (existing) {
     existing.quantity += 1;
   } else {
-    cart.push({ ...product, quantity: 1, category });
+    cart.push({ ...product, quantity: 50, category });
   }
   localStorage.setItem('cart', JSON.stringify(cart));
   updateCartCount();
   if (confirm('Go to cart?')) {
     window.location.href = 'cart.html';
   }
+});
+
+document.getElementById('back-button').addEventListener('click', () => {
+  window.history.back();
+});
+
+document.getElementById('cart-icon').addEventListener('click', () => {
+  window.location.href = 'cart.html';
 });
