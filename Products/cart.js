@@ -38,7 +38,7 @@ document.addEventListener('click', (e) => {
     const index = parseInt(e.target.dataset.index);
     const action = e.target.dataset.action;
     if (action === 'increase') cart[index].quantity += 1;
-    else if (action === 'decrease' && cart[index].quantity > 10) cart[index].quantity -= 1;
+    else if (action === 'decrease' && cart[index].quantity > 50) cart[index].quantity -= 1;
     localStorage.setItem('cart', JSON.stringify(cart));
     renderCart();
   } else if (e.target.classList.contains('remove-item')) {
@@ -54,7 +54,7 @@ document.getElementById('proceed-to-checkout').addEventListener('click', () => {
   else alert('Your cart is empty!');
 });
 
-// Cart icon to cart page (redundant here but consistent)
+// Cart icon to cart page
 document.getElementById('cart-icon').addEventListener('click', () => {
   window.location.href = 'cart.html';
 });

@@ -1,4 +1,3 @@
-// checkout.js
 function initCustomCursor() {
   const cursor = document.getElementById('custom-cursor');
   if (!cursor) {
@@ -18,31 +17,82 @@ function initCustomCursor() {
 function handleQuoteFormSubmission() {
   const form = document.getElementById('eft-form');
   const statusMessage = document.getElementById('status-message');
-  if (!form || !statusMessage) {
-    console.error('Form or status message element not found.');
+  const popup = document.getElementById('success-popup');
+  const popupMessage = document.getElementById('popup-message');
+  if (!form || !statusMessage || !popup || !popupMessage) {
+    console.error('Form, status message, or popup elements not found.');
     return;
   }
   form.addEventListener('submit', function(event) {
     event.preventDefault();
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const phone = document.getElementById('phone').value;
-    if (name && email && phone) {
-      // Simulate sending quote with cart details (in real app, send to backend)
-      console.log('Quote request:', { name, email, phone, cart });
-      statusMessage.textContent = 'Thank you! We will send your quote soon.';
-      statusMessage.classList.add('success');
-      setTimeout(() => {
-        form.reset();
-        statusMessage.classList.remove('success');
-        statusMessage.textContent = '';
-        localStorage.removeItem('cart');
-        window.location.href = 'products.html';
-      }, 3000);
-    } else {
-      statusMessage.textContent = 'Please fill out all fields.';
-      statusMessage.classList.remove('success');
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const notes = document.getElementById('notes').value.trim();
+    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+
+    // Validate form and cart
+    if (!name || !email || !phone) {
+      statusMessage.textContent = 'Please fill in all required fields.';
+      statusMessage.classList.add('error');
+      return;
     }
+    if (cart.length === 0) {
+      statusMessage.textContent = 'Your cart is empty. Please add products before requesting a quote.';
+      statusMessage.classList.add('error');
+      return;
+    }
+
+    // Format cart details for email
+    const cartDetails = cart.map(item => `${item.name}: ${item.quantity}`).join(', ');
+    document.getElementById('cart-details').value = cartDetails;
+
+    // Prepare form data for Formspree
+    const formData = new FormData(form);
+
+    // Send form data via AJAX
+    fetch(form.action, {
+      method: 'POST',
+      body: formData,
+      headers: {
+        'Accept': 'application/json'
+      }
+    })
+    .then(response => {
+      if (response.ok) {
+        statusMessage.textContent = 'Quote request submitted successfully!';
+        statusMessage.classList.add('success');
+        // Show popup with personalized message (includes cart details)
+        popupMessage.textContent = `Hi ${name}, your query for ${cartDetails} has been received, an agent will attend to your quote as soon as possible.`;
+        popup.style.display = 'flex';
+        form.reset();
+        localStorage.removeItem('cart'); // Clear cart
+        renderCart(); // Update cart display
+        // Redirect to products.html after 6 seconds
+        setTimeout(() => {
+          window.location.href = 'products.html';
+        }, 6000);
+      } else {
+        throw new Error('Form submission failed');
+      }
+    })
+    .catch(error => {
+      console.error('Formspree error:', error);
+      statusMessage.textContent = 'Failed to submit quote request. Please try again later.';
+      statusMessage.classList.add('error');
+    });
+
+    // Close popup when clicking the close button
+    document.getElementById('close-popup').addEventListener('click', function() {
+      popup.style.display = 'none';
+    });
+
+    // Close popup when clicking outside the popup content
+    popup.addEventListener('click', function(event) {
+      if (event.target === popup) {
+        popup.style.display = 'none';
+      }
+    });
   });
 }
 
@@ -65,14 +115,22 @@ function renderCart() {
     `;
     cartItems.appendChild(div);
   });
+  // Update cart count in header
+  const cartCount = document.getElementById('cart-count');
+  if (cartCount) {
+    cartCount.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+  }
 }
 
 document.addEventListener('click', (e) => {
   if (e.target.classList.contains('qty-btn')) {
     const index = parseInt(e.target.dataset.index);
     const action = e.target.dataset.action;
-    if (action === 'increase') cart[index].quantity += 1;
-    else if (action === 'decrease' && cart[index].quantity > 50) cart[index].quantity -= 1;
+    if (action === 'increase') {
+      cart[index].quantity += 1;
+    } else if (action === 'decrease' && cart[index].quantity > 50) {
+      cart[index].quantity -= 1;
+    }
     localStorage.setItem('cart', JSON.stringify(cart));
     renderCart();
   } else if (e.target.classList.contains('remove-item')) {

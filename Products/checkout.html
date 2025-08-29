@@ -41,7 +41,7 @@
                 <h2 class="section-title">Your Cart</h2>
                 <div id="cart-items"></div>
                 <h3>Request Quote Details</h3>
-                <form id="eft-form" action="https://formspree.io/f/mbladbeg" method="POST">
+                <form id="eft-form" action="https://formspree.io/f/mvgbkppp" method="POST">
                     <div class="form-group">
                         <label for="name">Full Name</label>
                         <input id="name" name="name" type="text" placeholder="Full Name" required>
@@ -58,6 +58,7 @@
                         <label for="notes">Additional Notes</label>
                         <textarea id="notes" name="notes" placeholder="Additional Notes" rows="2"></textarea>
                     </div>
+                    <input type="hidden" id="cart-details" name="cart_details">
                     <button type="submit" class="submit-button">Submit Quote Request</button>
                 </form>
                 <p id="status-message"></p>
@@ -115,68 +116,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="data.js"></script>
     <script src="checkout.js"></script>
-    <script>
-        document.getElementById('eft-form').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent default form submission
-
-            // Get form values
-            const name = document.getElementById('name').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const phone = document.getElementById('phone').value.trim();
-            const notes = document.getElementById('notes').value.trim();
-            const statusMessage = document.getElementById('status-message');
-            const popup = document.getElementById('success-popup');
-            const popupMessage = document.getElementById('popup-message');
-
-            // Basic client-side validation
-            if (!name || !email || !phone) {
-                statusMessage.textContent = 'Please fill in all required fields.';
-                statusMessage.className = 'error';
-                return;
-            }
-
-            // Prepare form data for Formspree
-            const form = document.getElementById('eft-form');
-            const formData = new FormData(form);
-
-            // Send form data via AJAX
-            fetch(form.action, {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
-            })
-            .then(response => {
-                if (response.ok) {
-                    statusMessage.textContent = 'Quote request submitted successfully!';
-                    statusMessage.className = 'success';
-                    // Show popup with personalized message
-                    popupMessage.textContent = `Hi ${name}, your query has been received, an agent will attend to your quote as soon as possible.`;
-                    popup.style.display = 'flex';
-                    form.reset(); // Clear form
-                } else {
-                    throw new Error('Form submission failed');
-                }
-            })
-            .catch(error => {
-                console.error('Formspree error:', error);
-                statusMessage.textContent = 'Failed to submit quote request. Please try again later.';
-                statusMessage.className = 'error';
-            });
-
-            // Close popup when clicking the close button
-            document.getElementById('close-popup').addEventListener('click', function() {
-                popup.style.display = 'none';
-            });
-
-            // Close popup when clicking outside the popup content
-            popup.addEventListener('click', function(event) {
-                if (event.target === popup) {
-                    popup.style.display = 'none';
-                }
-            });
-        });
-    </script>
 </body>
 </html>

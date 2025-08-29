@@ -277,15 +277,16 @@ body {
   padding: 4rem 0;
 }
 
-.contact-form-section h2 {
+.contact-form-section .section-title {
   font-size: 2.5rem;
   color: #1A3C34;
   text-align: center;
   margin-bottom: 2rem;
+  font-weight: bold;
 }
 
-#contact-form {
-  max-width: 600px;
+#eft-form {
+  max-width: 400px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -306,6 +307,7 @@ body {
 
 .form-group input,
 .form-group textarea {
+  width: 100%;
   padding: 0.75rem;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -329,27 +331,60 @@ body {
   resize: vertical;
 }
 
-.btn {
-  background-color: #1A3C34;
-  color: #fff;
-  padding: 0.9rem 1.8rem;
+.submit-button {
+  background: #A9C9A4;
   border: none;
-  border-radius: 4px;
-  font-weight: bold;
-  transition: background 0.3s, transform 0.3s;
+  padding: 10px 20px;
+  color: #fff;
+  border-radius: 50px;
   cursor: pointer;
-  width: fit-content;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: transform 0.3s, background 0.3s;
+  width: 100%;
+  max-width: 200px;
   align-self: center;
 }
 
-.btn:hover {
-  background-color: #A9C9A4;
+.submit-button:hover {
   transform: scale(1.05);
+  background: #1A3C34;
+}
+
+.eft-note {
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+#status-message {
+  font-size: 1rem;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+#status-message.success {
+  color: #1A3C34;
+  font-weight: bold;
+}
+
+#status-message.error {
+  color: #e74c3c;
+  font-weight: bold;
 }
 
 /* Map Section */
 .map-section {
-  padding: 2rem 0;
+  padding: 4rem 0;
+}
+
+.map-section .section-title {
+  font-size: 2.5rem;
+  color: #1A3C34;
+  text-align: center;
+  margin-bottom: 2rem;
+  font-weight: bold;
 }
 
 .map-container {
@@ -364,6 +399,7 @@ body {
   display: block;
 }
 
+/* Responsive Design */
 @media (max-width: 768px) {
   .menu-toggle {
     display: block;
@@ -411,13 +447,17 @@ body {
     max-width: 100%;
   }
 
-  .contact-form-section h2 {
+  .contact-form-section .section-title {
     font-size: 2rem;
   }
 
-  #contact-form {
+  #eft-form {
     max-width: 100%;
     padding: 0 1rem;
+  }
+
+  .map-section .section-title {
+    font-size: 2rem;
   }
 
   .map-container img {
@@ -431,15 +471,82 @@ body {
 }
 
 @media (max-width: 480px) {
-  .contact-form-section h2 {
+  .contact-form-section .section-title {
     font-size: 1.8rem;
   }
 
-  .btn {
-    padding: 0.75rem 1.5rem;
+  .submit-button {
+    max-width: 180px;
+  }
+
+  .map-section .section-title {
+    font-size: 1.8rem;
   }
 
   .map-container img {
     height: 250px;
+  }
+}
+
+/* Popup Styles */
+.popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-content {
+  background: #FFFFFF;
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 500px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.popup-content p {
+  font-size: 1.1rem;
+  color: #1A3C34;
+  margin-bottom: 1.5rem;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #666;
+}
+
+.close:hover {
+  color: #1A3C34;
+}
+
+@media (max-width: 768px) {
+  .popup-content {
+    width: 95%;
+    padding: 1.5rem;
+  }
+  .popup-content p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .popup-content {
+    padding: 1rem;
+  }
+  .popup-content p {
+    font-size: 0.9rem;
   }
 }

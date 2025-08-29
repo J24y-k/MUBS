@@ -6,7 +6,6 @@
   <title>Contact Us - Mubs Amenities Suppliers</title>
   <link rel="stylesheet" href="index-style.css"/>
   <link rel="stylesheet" href="styles.css"/>
-
   <!-- Favicon -->
   <link rel="icon" href="/images/Mubs Logo.png" type="image/png" />
 </head>
@@ -29,7 +28,6 @@
         <a href="/index.html" class="nav-link">HOME</a>
         <a href="/About/about.html" class="nav-link">ABOUT US</a>
         <a href="/Products/products.html" class="nav-link products-link">PRODUCTS</a>
-  <!--   <a href="/Special offers/offers.html" class="nav-link">SPECIAL OFFERS</a> -->
         <a href="/Contact/contact.html" class="nav-link active">CONTACT US</a>
       </nav>
     </div>
@@ -62,29 +60,46 @@
     <!-- Contact Form Section -->
     <section class="contact-form-section">
       <div class="container">
-        <h2>Get in Touch</h2>
-        <form id="contact-form" action="#" method="POST">
+        <h2 class="section-title">GET A QUOTE</h2>
+        <form id="eft-form" action="https://formspree.io/f/mbladbeg" method="POST">
           <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name" required />
+            <label for="name">Full Name</label>
+            <input id="name" name="name" type="text" placeholder="Full Name" required>
           </div>
           <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" id="email" name="email" required />
+            <input id="email" name="email" type="email" placeholder="Email" required>
           </div>
           <div class="form-group">
-            <label for="message">Message</label>
-            <textarea id="message" name="message" rows="5" required></textarea>
+            <label for="phone">Phone Number</label>
+            <input id="phone" name="phone" type="tel" placeholder="Phone Number" required>
           </div>
-          <button type="submit" class="btn">Send Message</button>
+          <div class="form-group">
+            <label for="notes">Additional Notes</label>
+            <textarea id="notes" name="notes" placeholder="Additional Notes" rows="3"></textarea>
+          </div>
+          <button type="submit" class="submit-button">Submit Quote Request</button>
         </form>
+        <p id="status-message"></p>
+        <p class="eft-note">After submission, you'll receive quote instructions via email.</p>
       </div>
     </section>
 
+    <!-- Popup Modal -->
+    <div id="success-popup" class="popup">
+      <div class="popup-content">
+        <span id="close-popup" class="close">&times;</span>
+        <p id="popup-message"></p>
+      </div>
+    </div>
+
     <!-- Map Section -->
     <section class="map-section">
-      <div class="map-container">
-        <img src="../images/Screenshot 2025-08-28 165604.png" alt="Map of Mubs Amenities Suppliers location at 12 Skeflood Street, Isando" style="width: 100%; height: 400px; object-fit: cover;" />
+      <div class="container">
+        <h2 class="section-title">OUR LOCATION</h2>
+        <div class="map-container">
+          <img src="../images/Screenshot 2025-08-28 165604.png" alt="Map of Mubs Amenities Suppliers location at Avenue le Marinel, N°06, Gombe, Kinshasa" style="width: 100%; height: 400px; object-fit: cover;" />
+        </div>
       </div>
     </section>
   </main>
@@ -96,7 +111,7 @@
         <div class="footer-section">
           <img src="../images/Mubs.svg.svg" alt="Mubs Amenities Suppliers Logo" />
         </div>
-       <div class="footer-section">
+        <div class="footer-section">
           <h4>CONTACT</h4>
           <p>EMAIL: <a href="mailto:mubsamenities@gmail.com">mubsamenities@gmail.com</a></p>
           <p>PHONE: <a href="tel:+27838256509">+27 83 825 6509</a><br><a href="tel:+243860385032">+243 86 038 5032</a></p>
@@ -107,10 +122,73 @@
           <p>Commune de Gombe, Kinshasa Democratic Republic of Congo</p>
         </div>
       </div>
-      <p class="footer-text">© Copyright Mubs Amenities Suppliers 2025 | All rights reserved |BUILT BY<a href="https://www.linkedin.com/in/jeremie-kazadi-013a55372?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" style="color: inherit; text-decoration: underline;">INFINITY</p>
+      <p class="footer-text">© Copyright Mubs Amenities Suppliers 2025 | All rights reserved | BUILT BY <a href="https://www.linkedin.com/in/jeremie-kazadi-013a55372?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" style="color: inherit; text-decoration: underline;">INFINITY</a></p>
     </div>
   </footer>
 
   <script src="script.js"></script>
+  <script>
+    document.getElementById('eft-form').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent default form submission
+
+      // Get form values
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const notes = document.getElementById('notes').value.trim();
+      const statusMessage = document.getElementById('status-message');
+      const popup = document.getElementById('success-popup');
+      const popupMessage = document.getElementById('popup-message');
+
+      // Basic client-side validation
+      if (!name || !email || !phone) {
+        statusMessage.textContent = 'Please fill in all required fields.';
+        statusMessage.className = 'error';
+        return;
+      }
+
+      // Prepare form data for Formspree
+      const form = document.getElementById('eft-form');
+      const formData = new FormData(form);
+
+      // Send form data via AJAX
+      fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      })
+      .then(response => {
+        if (response.ok) {
+          statusMessage.textContent = 'Quote request submitted successfully!';
+          statusMessage.className = 'success';
+          // Show popup with personalized message
+          popupMessage.textContent = `Hi ${name}, your query has been received, an agent will attend to your quote as soon as possible.`;
+          popup.style.display = 'flex';
+          form.reset(); // Clear form
+        } else {
+          throw new Error('Form submission failed');
+        }
+      })
+      .catch(error => {
+        console.error('Formspree error:', error);
+        statusMessage.textContent = 'Failed to submit quote request. Please try again later.';
+        statusMessage.className = 'error';
+      });
+
+      // Close popup when clicking the close button
+      document.getElementById('close-popup').addEventListener('click', function() {
+        popup.style.display = 'none';
+      });
+
+      // Close popup when clicking outside the popup content
+      popup.addEventListener('click', function(event) {
+        if (event.target === popup) {
+          popup.style.display = 'none';
+        }
+      });
+    });
+  </script>
 </body>
 </html>
