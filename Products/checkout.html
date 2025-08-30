@@ -3,13 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Request Quote - Mubs</title>
-    <link rel="stylesheet" href="checkout.css">
+    <title>Request Quote for Hotel Amenities | Mubs</title>
+    <meta name="description" content="Request a quote for Mubs' premium hotel amenities, including shampoo, body wash, and custom packaging for hotels in South Africa and DR Congo." />
+    <meta name="keywords" content="request quote hotel amenities, hotel toiletries, shampoo for hotels, body wash for hotels, Kinshasa hotel supplies, South Africa hotel amenities" />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Mubs" />
+    <!-- Open Graph -->
+    <meta property="og:title" content="Request Quote for Hotel Amenities | Mubs" />
+    <meta property="og:description" content="Submit a quote request for Mubs' premium hotel amenities, including shampoo, body wash, and custom packaging." />
+    <meta property="og:image" content="https://www.mubs.info/images/Mubs.svg.svg" />
+    <meta property="og:url" content="https://www.mubs.info/checkout.html" />
+    <meta property="og:type" content="website" />
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Request Quote for Hotel Amenities | Mubs" />
+    <meta name="twitter:description" content="Submit a quote request for Mubs' premium hotel amenities, including shampoo, body wash, and custom packaging." />
+    <meta name="twitter:image" content="https://www.mubs.info/images/Mubs.svg.svg" />
     <!-- Favicon -->
-    <link rel="icon" href="/images/Mubs Logo.png" type="image/png" />
+    <link rel="icon" type="image/svg+xml" href="/images/Mubs.svg.svg" />
+    <link rel="alternate icon" type="image/x-icon" href="/images/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-192x192.png" />
+    <link rel="manifest" href="/images/manifest.json" />
+    <!-- CSS -->
+    <link rel="stylesheet" href="checkout.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&display=swap" rel="stylesheet">
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Request Quote for Hotel Amenities",
+      "url": "https://www.mubs.info/checkout.html",
+      "description": "Request a quote for Mubs' premium hotel amenities, including shampoo, body wash, lotion, dental kits, and custom packaging for hotels in South Africa and DR Congo.",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Mubs",
+        "url": "https://www.mubs.info"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Mubs",
+        "url": "https://www.mubs.info",
+        "logo": "https://www.mubs.info/images/Mubs.svg.svg",
+        "contactPoint": [
+          {
+            "@type": "ContactPoint",
+            "telephone": "+27838256509",
+            "contactType": "Customer Service",
+            "areaServed": ["ZA", "CD"],
+            "availableLanguage": ["English"]
+          },
+          {
+            "@type": "ContactPoint",
+            "telephone": "+243860385032",
+            "contactType": "Customer Service",
+            "areaServed": ["ZA", "CD"],
+            "availableLanguage": ["English"]
+          },
+          {
+            "@type": "ContactPoint",
+            "email": "mubsamenities@gmail.com",
+            "contactType": "Customer Service",
+            "areaServed": ["ZA", "CD"],
+            "availableLanguage": ["English"]
+          }
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Avenue le Marinel, N°06",
+          "addressLocality": "Commune de Gombe",
+          "addressRegion": "Kinshasa",
+          "addressCountry": "CD"
+        }
+      }
+    }
+    </script>
 </head>
 <body>
     <div id="custom-cursor"></div>
@@ -17,7 +87,7 @@
     <header class="header">
         <div class="top-container">
             <div class="logo" data-animate="fade-in">
-                <img src="/images/Mubs.svg.svg" alt="Mubs Amenities Suppliers Logo">
+                <img src="/images/Mubs.svg.svg" alt="Mubs Logo">
                 <div class="logo-text">
                     <h1>Mubs</h1>
                     <p>A division of Bidvest Services (Pty) Ltd</p>
@@ -38,10 +108,9 @@
     <main>
         <section class="checkout section">
             <div class="container">
-                <h2 class="section-title">Your Cart</h2>
-                <div id="cart-items"></div>
-                <h3>Request Quote Details</h3>
-                <form id="eft-form" action="https://formspree.io/f/mvgbkppp" method="POST">
+                <h2>Request a Quote</h2>
+                <p>Please fill out the form below to request a quote for your selected items.</p>
+                <form id="quote-form" action="https://formspree.io/f/mbladbeg" method="POST">
                     <div class="form-group">
                         <label for="name">Full Name</label>
                         <input id="name" name="name" type="text" placeholder="Full Name" required>
@@ -55,32 +124,35 @@
                         <input id="phone" name="phone" type="tel" placeholder="Phone Number" required>
                     </div>
                     <div class="form-group">
-                        <label for="notes">Additional Notes</label>
-                        <textarea id="notes" name="notes" placeholder="Additional Notes" rows="2"></textarea>
+                        <label for="cart-items">Selected Items</label>
+                        <textarea id="cart-items" name="cart-items" readonly></textarea>
                     </div>
-                    <input type="hidden" id="cart-details" name="cart_details">
+                    <div class="form-group">
+                        <label for="notes">Additional Notes</label>
+                        <textarea id="notes" name="notes" placeholder="Additional Notes" rows="3"></textarea>
+                    </div>
                     <button type="submit" class="submit-button">Submit Quote Request</button>
                 </form>
                 <p id="status-message"></p>
                 <p class="eft-note">After submission, you'll receive quote instructions via email.</p>
             </div>
         </section>
-    </main>
 
-    <!-- Popup Modal -->
-    <div id="success-popup" class="popup">
-        <div class="popup-content">
-            <span id="close-popup" class="close">&times;</span>
-            <p id="popup-message"></p>
+        <!-- Popup Modal -->
+        <div id="success-popup" class="popup">
+            <div class="popup-content">
+                <span id="close-popup" class="close">&times;</span>
+                <p id="popup-message"></p>
+            </div>
         </div>
-    </div>
+    </main>
 
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <img src="/images/Mubs.svg.svg" alt="Bidvest Logo">
+                    <img src="/images/Mubs.svg.svg" alt="Mubs Logo">
                 </div>
                 <div class="footer-section">
                     <h4>CONTACT</h4>
@@ -93,7 +165,7 @@
                     <p>Commune de Gombe, Kinshasa Democratic Republic of Congo</p>
                 </div>
             </div>
-            <p class="footer-text">© Copyright Mubs 2025 | All rights reserved | BUILT BY <a href="https://www.linkedin.com/in/jeremie-kazadi-013a55372?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" style="color: inherit; text-decoration: underline;">INFINITY</p>
+            <p class="footer-text">© Copyright Mubs 2025 | All rights reserved | BUILT BY <a href="https://www.linkedin.com/in/jeremie-kazadi-013a55372?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" style="color: inherit; text-decoration: underline;">INFINITY</a></p>
         </div>
     </footer>
 
