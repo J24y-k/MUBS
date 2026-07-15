@@ -16,8 +16,10 @@ function initCustomCursor() {
 
 function renderProducts(category) {
   const grid = document.getElementById('product-grid');
+  if (!grid) return;
   grid.innerHTML = '';
   let prods = [];
+  const isFrench = window.location.pathname.includes('-fr.html');
 
   if (category === 'all') {
     Object.entries(products).forEach(([catName, catItems]) => {
@@ -33,11 +35,11 @@ function renderProducts(category) {
     card.dataset.category = product.category;
     card.dataset.id = product.id;
     card.innerHTML = `
-      <img src="${product.image}" alt="${product.name}" class="product-image" 
+      <img src="${product.image}" alt="${product.alt[isFrench ? 'fr' : 'en']}" class="product-image" 
         onerror="this.src='https://via.placeholder.com/150x150?text=No+Image'">
-      <div class="overlay"><p>${product.name}</p></div>
-      <div class="product-description">${product.description}</div>
-      <button class="add-to-cart">Add to Cart</button>
+      <div class="overlay"><p>${product.name[isFrench ? 'fr' : 'en']}</p></div>
+      <div class="product-description">${product.description[isFrench ? 'fr' : 'en']}</div>
+      <button class="add-to-cart">${isFrench ? 'Ajouter au Panier' : 'Add to Cart'}</button>
     `;
     grid.appendChild(card);
   });
@@ -59,7 +61,10 @@ document.querySelectorAll('.tab-button').forEach(btn => {
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
 function updateCartCount() {
-  document.getElementById('cart-count').textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+  const cartCount = document.getElementById('cart-count');
+  if (cartCount) {
+    cartCount.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+  }
 }
 
 updateCartCount();
@@ -72,16 +77,19 @@ document.getElementById('product-grid').addEventListener('click', (e) => {
     const category = card.dataset.category;
     const id = parseInt(card.dataset.id);
     const product = products[category].find(p => p.id === id);
+    const isFrench = window.location.pathname.includes('-fr.html');
 
     const existing = cart.find(item => item.id === id && item.category === category);
     if (existing) {
       existing.quantity += 1;
     } else {
-      cart.push({ ...product, quantity: 50, category });
+      cart.push({ ...product, quantity: product.minimumOrder, category });
     }
     localStorage.setItem('cart', JSON.stringify(cart));
     updateCartCount();
-    alert(`${product.name} added to cart (minimum 10 units)!`);
+    alert(isFrench 
+      ? `${product.name.fr} ajouté au panier (minimum ${product.minimumOrder} unités) !` 
+      : `${product.name.en} added to cart (minimum ${product.minimumOrder} units)!`);
   }
 });
 
@@ -89,13 +97,15 @@ document.getElementById('product-grid').addEventListener('click', (e) => {
 document.getElementById('product-grid').addEventListener('click', (e) => {
   const card = e.target.closest('.product-item');
   if (card && !e.target.classList.contains('add-to-cart')) {
-    window.location.href = `product-details.html?category=${card.dataset.category}&id=${card.dataset.id}`;
+    const isFrench = window.location.pathname.includes('-fr.html');
+    window.location.href = `product-details${isFrench ? '-fr' : ''}.html?category=${card.dataset.category}&id=${card.dataset.id}`;
   }
 });
 
 // Cart icon to cart page
 document.getElementById('cart-icon').addEventListener('click', () => {
-  window.location.href = 'cart.html';
+  const isFrench = window.location.pathname.includes('-fr.html');
+  window.location.href = isFrench ? 'cart-fr.html' : 'cart.html';
 });
 
 // Initialize on DOM ready

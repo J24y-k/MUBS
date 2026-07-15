@@ -15,7 +15,7 @@ function initCustomCursor() {
 }
 
 function handleQuoteFormSubmission() {
-  const form = document.getElementById('eft-form');
+  const form = document.getElementById('quote-form');
   const statusMessage = document.getElementById('status-message');
   const popup = document.getElementById('success-popup');
   const popupMessage = document.getElementById('popup-message');
@@ -30,22 +30,23 @@ function handleQuoteFormSubmission() {
     const phone = document.getElementById('phone').value.trim();
     const notes = document.getElementById('notes').value.trim();
     const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    const isFrench = window.location.pathname.includes('-fr.html');
 
     // Validate form and cart
     if (!name || !email || !phone) {
-      statusMessage.textContent = 'Please fill in all required fields.';
+      statusMessage.textContent = isFrench ? 'Veuillez remplir tous les champs requis.' : 'Please fill in all required fields.';
       statusMessage.classList.add('error');
       return;
     }
     if (cart.length === 0) {
-      statusMessage.textContent = 'Your cart is empty. Please add products before requesting a quote.';
+      statusMessage.textContent = isFrench ? 'Votre panier est vide. Veuillez ajouter des produits avant de demander un devis.' : 'Your cart is empty. Please add products before requesting a quote.';
       statusMessage.classList.add('error');
       return;
     }
 
     // Format cart details for email
-    const cartDetails = cart.map(item => `${item.name}: ${item.quantity}`).join(', ');
-    document.getElementById('cart-details').value = cartDetails;
+    const cartDetails = cart.map(item => `${item.name[isFrench ? 'fr' : 'en']}: ${item.quantity}`).join(', ');
+    document.getElementById('cart-items').value = cartDetails;
 
     // Prepare form data for Formspree
     const formData = new FormData(form);
@@ -60,17 +61,19 @@ function handleQuoteFormSubmission() {
     })
     .then(response => {
       if (response.ok) {
-        statusMessage.textContent = 'Quote request submitted successfully!';
+        statusMessage.textContent = isFrench ? 'Demande de devis soumise avec succès !' : 'Quote request submitted successfully!';
         statusMessage.classList.add('success');
-        // Show popup with personalized message (includes cart details)
-        popupMessage.textContent = `Hi ${name}, your query for ${cartDetails} has been received, an agent will attend to your quote as soon as possible.`;
+        // Show popup with personalized message
+        popupMessage.textContent = isFrench 
+          ? `Bonjour ${name}, votre demande pour ${cartDetails} a été reçue. Un agent traitera votre devis dès que possible.` 
+          : `Hi ${name}, your request for ${cartDetails} has been received. An agent will attend to your quote as soon as possible.`;
         popup.style.display = 'flex';
         form.reset();
         localStorage.removeItem('cart'); // Clear cart
         renderCart(); // Update cart display
-        // Redirect to products.html after 6 seconds
+        // Redirect to products page after 6 seconds
         setTimeout(() => {
-          window.location.href = 'products.html';
+          window.location.href = isFrench ? 'products-fr.html' : 'products.html';
         }, 6000);
       } else {
         throw new Error('Form submission failed');
@@ -78,7 +81,7 @@ function handleQuoteFormSubmission() {
     })
     .catch(error => {
       console.error('Formspree error:', error);
-      statusMessage.textContent = 'Failed to submit quote request. Please try again later.';
+      statusMessage.textContent = isFrench ? 'Échec de la soumission de la demande de devis. Veuillez réessayer plus tard.' : 'Failed to submit quote request. Please try again later.';
       statusMessage.classList.add('error');
     });
 
@@ -100,18 +103,20 @@ let cart = JSON.parse(localStorage.getItem('cart')) || [];
 const cartItems = document.getElementById('cart-items');
 
 function renderCart() {
+  if (!cartItems) return;
   cartItems.innerHTML = '';
+  const isFrench = window.location.pathname.includes('-fr.html');
   cart.forEach((item, index) => {
     const div = document.createElement('div');
     div.classList.add('cart-item');
     div.innerHTML = `
-      <span>${item.name} x ${item.quantity}</span>
+      <span>${item.name[isFrench ? 'fr' : 'en']} x ${item.quantity}</span>
       <div class="quantity-controls">
         <button class="qty-btn" data-index="${index}" data-action="decrease">-</button>
         <span>${item.quantity}</span>
         <button class="qty-btn" data-index="${index}" data-action="increase">+</button>
       </div>
-      <button class="remove-item" data-index="${index}">Remove</button>
+      <button class="remove-item" data-index="${index}">${isFrench ? 'Supprimer' : 'Remove'}</button>
     `;
     cartItems.appendChild(div);
   });
@@ -128,7 +133,7 @@ document.addEventListener('click', (e) => {
     const action = e.target.dataset.action;
     if (action === 'increase') {
       cart[index].quantity += 1;
-    } else if (action === 'decrease' && cart[index].quantity > 50) {
+    } else if (action === 'decrease' && cart[index].quantity > cart[index].minimumOrder) {
       cart[index].quantity -= 1;
     }
     localStorage.setItem('cart', JSON.stringify(cart));

@@ -320,7 +320,7 @@ body {
 }
 
 /* Form Styles */
-#eft-form {
+.form {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -330,21 +330,21 @@ body {
   width: 100%;
 }
 
-#eft-form .form-group {
+.form .form-group {
   display: flex;
   flex-direction: column;
   width: 100%;
 }
 
-#eft-form label {
+.form label {
   font-size: 1rem;
   color: #1A3C34;
   margin-bottom: 0.5rem;
   font-weight: 500;
 }
 
-#eft-form input,
-#eft-form textarea {
+.form input,
+.form textarea {
   width: 100%;
   max-width: 100%;
   padding: 0.75rem;
@@ -354,16 +354,22 @@ body {
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-#eft-form input:focus,
-#eft-form textarea:focus {
+.form input:focus,
+.form textarea:focus {
   outline: none;
   border-color: #1A3C34;
   box-shadow: 0 0 5px rgba(26, 60, 52, 0.3);
 }
 
-#eft-form input:invalid:not(:placeholder-shown),
-#eft-form textarea:invalid:not(:placeholder-shown) {
+.form input:invalid:not(:placeholder-shown),
+.form textarea:invalid:not(:placeholder-shown) {
   border-color: #e74c3c;
+}
+
+.form textarea[readonly] {
+  background-color: #f5f5f5;
+  color: #666;
+  cursor: not-allowed;
 }
 
 .eft-note {
@@ -601,7 +607,7 @@ body {
     width: 100%;
   }
 
-  #eft-form {
+  .form {
     max-width: 100%;
     padding: 0 1rem;
   }
@@ -662,16 +668,16 @@ body {
     padding: 8px 16px;
   }
 
-  #eft-form {
+  .form {
     gap: 1rem;
   }
 
-  #eft-form label {
+  .form label {
     font-size: 0.9rem;
   }
 
-  #eft-form input,
-  #eft-form textarea {
+  .form input,
+  .form textarea {
     font-size: 0.9rem;
     padding: 0.6rem;
   }
@@ -719,4 +725,25 @@ body {
     font-size: 0.7rem;
     padding: 1px 5px;
   }
+}
+
+.language-switch {
+  display: flex;
+  gap: 10px;
+  font-size: 14px;
+  align-items: center;
+}
+
+.language-switch a {
+  color: #333;
+  text-decoration: none;
+}
+
+.language-switch a.active {
+  font-weight: bold;
+  color: #000;
+}
+
+.language-switch a:hover {
+  text-decoration: underline;
 }

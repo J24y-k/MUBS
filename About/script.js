@@ -17,6 +17,25 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Language Switch
+    function switchLanguage(lang, page) {
+        if (page === 'about') {
+            window.location.href = lang === 'fr' ? '/About/about-fr.html' : '/About/about.html';
+        } else {
+            window.location.href = lang === 'fr' ? '/index-fr.html' : '/index.html';
+        }
+    }
+
+    // Add click handlers for language switch
+    document.querySelectorAll('.lang-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const lang = e.target.getAttribute('lang');
+            const page = window.location.pathname.includes('about') ? 'about' : 'index';
+            switchLanguage(lang, page);
+        });
+    });
+
     // Animation on scroll for navbar
     const animateElements = document.querySelectorAll('[data-animate]');
     const observer = new IntersectionObserver((entries) => {
